@@ -14,9 +14,10 @@ public:
     void display_grid(std::vector<std::vector<int>> &v)const;
     std::vector<std::vector<int>>& get_grid(){return grid;}
     inline size_t getNrOfAliveNeighbours(size_t x, size_t y)const;
+    void set_size(size_t length, size_t width);
 
 private:
-    const size_t WIDTH, LENGTH;
+    size_t WIDTH, LENGTH;
     std::vector<std::vector<int>> grid;
 
 };

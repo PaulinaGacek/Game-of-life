@@ -10,7 +10,6 @@ Algorithm::Algorithm(size_t width, size_t length) :WIDTH(width),LENGTH(length){
 }
 
 bool Algorithm::load_grid_from_file(const char *file_name) {
-    std::cout << "Load grid from file" << std::endl;
     std::fstream grid_file;
     grid_file.open(file_name, std::ios::in);
     if (!grid_file) {
@@ -21,7 +20,6 @@ bool Algorithm::load_grid_from_file(const char *file_name) {
         size_t x,y;
         while (grid_file >> y >> x) {
             if( x < WIDTH && y < LENGTH){
-                std::cout << "y: "<< y<< "  x: " << x << std::endl;
                 grid[y][x] = 1;
             }
         }
@@ -70,8 +68,6 @@ void Algorithm::compute_next_grid() {
     for(size_t i = 0; i < LENGTH; ++i){
         new_grid.push_back(row_with_zeroes);
     }
-
-    std::cout << "New grid:" << std::endl;
     for(size_t i = 0; i < LENGTH; ++i){
         for(size_t j = 0; j < WIDTH; ++j){
             size_t aliveNeighbours = getNrOfAliveNeighbours(j,i);
@@ -85,4 +81,17 @@ void Algorithm::compute_next_grid() {
         }
     }
     grid = std::move(new_grid);
+}
+
+void Algorithm::set_size(size_t length, size_t width) {
+    WIDTH = width;
+    LENGTH = length;
+
+    std::vector<std::vector<int>> grid2;
+    grid2.reserve(length);
+    std::vector<int> row_with_zeroes(width,0);
+    for(size_t i = 0; i < length; ++i){
+        grid2.push_back(row_with_zeroes);
+    }
+    grid = std::move(grid2);
 }
