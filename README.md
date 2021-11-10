@@ -20,4 +20,4 @@ where
 
 #### Syntax of the file which initial state ####
 *all lines* are the list of live cells on digit in format `X Y`, 
-`X in [1,2,...,MAX_WIDTH], Y in [1,2,...,MAX_LENGTH]`
+`X in [0,1,2,...,MAX_WIDTH-1], Y in [0,1,2,...,MAX_LENGTH-1]`

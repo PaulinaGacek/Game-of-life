@@ -1,3 +1,3 @@
 CONSOLE
 30 15
-initial_state.txt
+../src/common/initial_state.txt
