@@ -20,7 +20,7 @@ protected:
     void keyPressEvent(QKeyEvent *) override;
 
 private:
-    QImage alive, dead;
+    QImage alive;
     std::vector<std::vector<int>> board;
     Algorithm algorithm;
 

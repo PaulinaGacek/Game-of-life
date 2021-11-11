@@ -19,8 +19,7 @@ Board::Board(const char* initial_file, int length, int width, QWidget *parent):
 }
 
 void Board::load_images() {
-    std::cout << "images loaded";
-    alive.load("LanceStrollMini3.png");
+    alive.load("../Helmets/LanceStrollMini.png");
 }
 
 void Board::play_game() {
