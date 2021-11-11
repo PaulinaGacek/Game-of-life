@@ -1,8 +1,10 @@
 #include <thread>
+#include <QApplication>
 #include "common/Algorithm.h"
 #include "console/ConsoleBoard.h"
+#include "qt/QTBoard.h"
 
-int main() {
+int main(int argc, char *argv[]) {
     const char* config_file = "../src/common/config.txt";
     std::fstream grid_file;
     grid_file.open(config_file, std::ios::in);
@@ -21,7 +23,11 @@ int main() {
             consoleBoard.run_game();
         }
         else if(strcmp(mode,"QT")==0){
-
+            QApplication app(argc, argv);
+            Board window(initial_file,width,length);
+            window.setWindowTitle("The Game Of Life");
+            window.show();
+            return QApplication::exec();
         }
         else{
             std::cerr << "Improper syntax of config file"<< std::endl;

@@ -10,7 +10,7 @@ set(QT_VERSION 6)
 set(REQUIRED_LIBS Core Gui Widgets)
 set(REQUIRED_LIBS_QUALIFIED Qt6::Core Qt6::Gui Qt6::Widgets)
 
-add_executable(GameOfLife src/main.cpp src/console/ConsoleBoard.cpp src/console/ConsoleBoard.h src/common/Algorithm.cpp src/common/Algorithm.h src/common/config.txt)
+add_executable(GameOfLife src/main.cpp src/console/ConsoleBoard.cpp src/console/ConsoleBoard.h src/common/Algorithm.cpp src/common/Algorithm.h src/common/config.txt src/qt/QTBoard.cpp src/qt/QTBoard.h)
 
 target_link_libraries(${PROJECT_NAME} "winmm.lib" )
 if (NOT CMAKE_PREFIX_PATH)
