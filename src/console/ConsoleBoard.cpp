@@ -26,25 +26,13 @@ void ConsoleBoard::display_board() {
     }
 }
 
-ConsoleBoard::ConsoleBoard():algorithm(Algorithm(WIDTH, LENGTH)) {
-    std::fstream grid_file;
-    grid_file.open("../src/common/config.txt", std::ios::in);
-    if (!grid_file) {
-        std::cerr << "No such file as config.txt";
+ConsoleBoard::ConsoleBoard(const char *initial_state, size_t width, size_t length):
+    LENGTH(length), WIDTH(width), algorithm(Algorithm(width, length)) {
+    algorithm.load_grid_from_file(initial_state);
+    board.reserve(length);
+    std::vector<int> row_with_zeroes(width,0);
+    for(size_t i = 0; i < length; ++i){
+        board.push_back(row_with_zeroes);
     }
-    else {
-        char mode[20],initial_file[40];
-        grid_file.getline(mode, strlen(mode));
-        grid_file >> WIDTH >> LENGTH;
-        grid_file >> initial_file;
-        grid_file.close();
-        algorithm.set_size(LENGTH,WIDTH);
-        algorithm.load_grid_from_file(initial_file);
-        board.reserve(LENGTH);
-        std::vector<int> row_with_zeroes(WIDTH,0);
-        for(size_t i = 0; i < LENGTH; ++i){
-            board.push_back(row_with_zeroes);
-        }
-        board = algorithm.get_grid();
-    }
+    board = algorithm.get_grid();
 }

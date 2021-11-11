@@ -82,16 +82,3 @@ void Algorithm::compute_next_grid() {
     }
     grid = std::move(new_grid);
 }
-
-void Algorithm::set_size(size_t length, size_t width) {
-    WIDTH = width;
-    LENGTH = length;
-
-    std::vector<std::vector<int>> grid2;
-    grid2.reserve(length);
-    std::vector<int> row_with_zeroes(width,0);
-    for(size_t i = 0; i < length; ++i){
-        grid2.push_back(row_with_zeroes);
-    }
-    grid = std::move(grid2);
-}
