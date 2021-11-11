@@ -23,4 +23,4 @@ where
 `X in [0,1,2,...,MAX_WIDTH-1], Y in [0,1,2,...,MAX_LENGTH-1]`
 
 ### How it looks like with QT mode ###
-![grab-landing-page](https://github.com/PaulinaGacek/AGH-Racing-Task3/blob/master/Helmets/game_visualisation.gif = 100x150)
+<img src="https://github.com/PaulinaGacek/AGH-Racing-Task3/blob/master/Helmets/game_visualisation.gif" width="100" height="150">
