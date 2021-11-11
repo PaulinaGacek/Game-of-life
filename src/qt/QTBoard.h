@@ -26,7 +26,7 @@ private:
 
     const int WIDTH, HEIGHT;
     const int PIXEL_SIZE = 25;
-    static const int DELAY = 150;
+    static const int DELAY = 120;
     int timerId = 0;
 
     void load_images();
