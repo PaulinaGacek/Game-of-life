@@ -8,7 +8,7 @@ void ConsoleBoard::run_game() {
         display_board();
         algorithm.compute_next_grid();
         board = algorithm.get_grid();
-        std::this_thread::sleep_for(std::chrono::milliseconds(200));
+        std::this_thread::sleep_for(std::chrono::milliseconds(PERIOD));
     }
 }
 
@@ -26,8 +26,8 @@ void ConsoleBoard::display_board() {
     }
 }
 
-ConsoleBoard::ConsoleBoard(const char *initial_state, size_t width, size_t length):
-    LENGTH(length), WIDTH(width), algorithm(Algorithm(width, length)) {
+ConsoleBoard::ConsoleBoard(const char *initial_state, size_t width, size_t length, size_t period):
+    LENGTH(length), WIDTH(width), PERIOD(period), algorithm(Algorithm(width, length)) {
     algorithm.load_grid_from_file(initial_state);
     board.reserve(length);
     std::vector<int> row_with_zeroes(width,0);

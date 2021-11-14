@@ -16,6 +16,7 @@ configuration - config.txt, which syntax is as follows:
 
 *third line* consists of the name of file with initial state - as default there is a initial state provided in `common\initial_state.txt`
 
+*fourth line* consists of period of rendering new state given in milliseconds
 
 #### Syntax of the file which initial state ####
 *all lines* are the list of live cells on digit in format `X Y`, 

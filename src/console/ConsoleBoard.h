@@ -8,12 +8,12 @@
 #include "../common/Algorithm.h"
 
 class ConsoleBoard {
-    const size_t LENGTH, WIDTH;
+    const size_t LENGTH, WIDTH, PERIOD;
     Algorithm algorithm;
     std::vector<std::vector<int>> board;
     void display_board();
 public:
-    ConsoleBoard(const char* initial_state, size_t width, size_t length);
+    ConsoleBoard(const char* initial_state, size_t width, size_t length, size_t period);
     void run_game();
 };
 

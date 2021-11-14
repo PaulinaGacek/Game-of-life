@@ -12,19 +12,20 @@ int main(int argc, char *argv[]) {
         std::cerr << "No such file as " << config_file << std::endl;
     }
     else {
-        size_t width, length;
+        size_t width, length, period;
         char mode[20],initial_file[40];
         grid_file.getline(mode, strlen(mode));
         grid_file >> width >> length;
         grid_file >> initial_file;
+        grid_file >> period;
         grid_file.close();
         if(strcmp(mode,"CONSOLE")==0){
-            ConsoleBoard consoleBoard(initial_file,width,length);
+            ConsoleBoard consoleBoard(initial_file,width,length, period);
             consoleBoard.run_game();
         }
         else if(strcmp(mode,"QT")==0){
             QApplication app(argc, argv);
-            Board window(initial_file,width,length);
+            Board window(initial_file,width,length, period);
             window.setWindowTitle("The Game Of Life");
             window.show();
             return QApplication::exec();

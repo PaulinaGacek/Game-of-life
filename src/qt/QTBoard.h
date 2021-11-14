@@ -12,7 +12,7 @@
 class Board : public QWidget {
 
 public:
-    explicit Board(const char* initial_file, int length, int width, QWidget *parent = nullptr);
+    explicit Board(const char* initial_file, int length, int width,size_t period, QWidget *parent = nullptr);
 
 protected:
     void paintEvent(QPaintEvent *) override;
@@ -20,13 +20,14 @@ protected:
     void keyPressEvent(QKeyEvent *) override;
 
 private:
-    QImage alive;
+    static const int IMAGES = 3;
+    QImage aliveStroll, aliveNorris, aliveLeclerc;
     std::vector<std::vector<int>> board;
     Algorithm algorithm;
 
+    const size_t PERIOD;
     const int WIDTH, HEIGHT;
     const int PIXEL_SIZE = 25;
-    static const int DELAY = 120;
     int timerId = 0;
 
     void load_images();

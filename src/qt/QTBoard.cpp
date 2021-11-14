@@ -3,8 +3,8 @@
 #include "QTBoard.h"
 #include <ctime>
 
-Board::Board(const char* initial_file, int length, int width, QWidget *parent):
-        QWidget(parent), HEIGHT(length), WIDTH(width), algorithm(Algorithm(width, length)){
+Board::Board(const char* initial_file, int length, int width,size_t period, QWidget *parent):
+        QWidget(parent), HEIGHT(length), WIDTH(width), PERIOD(period), algorithm(Algorithm(width, length)){
     algorithm.load_grid_from_file(initial_file);
     board.reserve(length);
     std::vector<int> row_with_zeroes(width, 0);
@@ -19,13 +19,15 @@ Board::Board(const char* initial_file, int length, int width, QWidget *parent):
 }
 
 void Board::load_images() {
-    alive.load("../Helmets/LanceStrollMini.png");
+    aliveStroll.load("../Helmets/LanceStrollMini.png");
+    aliveLeclerc.load("../Helmets/CharlesLeclercMini.png");
+    aliveNorris.load("../Helmets/LandoNorrisMini.png");
 }
 
 void Board::play_game() {
     algorithm.compute_next_grid();
     board = algorithm.get_grid();
-    timerId = startTimer(DELAY);
+    timerId = startTimer(PERIOD);
 }
 
 void Board::paintEvent(QPaintEvent *e) {
@@ -39,8 +41,9 @@ void Board::display_board() {
     QPainter qp(this);
     for(size_t i = 0 ; i < HEIGHT; ++i){
         for(size_t j = 0; j < WIDTH; ++j){
-            if(board[i][j]==1)
-                qp.drawImage(i*PIXEL_SIZE,j*PIXEL_SIZE,alive);
+            if(board[i][j]==1){
+                qp.drawImage(i*PIXEL_SIZE,j*PIXEL_SIZE,aliveStroll);
+            }
         }
     }
 }
