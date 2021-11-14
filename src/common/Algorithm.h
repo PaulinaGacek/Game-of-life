@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <vector>
+#include <chrono>
 
 /**
  * Class implements algorithm which generates next states of the grid
@@ -21,6 +22,9 @@ public:
 private:
     inline size_t getNrOfAliveNeighbours(size_t x, size_t y)const;
     void display_grid(std::vector<std::vector<int>> &v)const;
+    void updateComputationTimeFile(std::chrono::time_point<std::chrono::system_clock> start,
+                                   std::chrono::time_point<std::chrono::system_clock> end);
+    void clearComputationTimeFile();
 
     const size_t WIDTH, LENGTH;
     std::vector<std::vector<int>> grid;

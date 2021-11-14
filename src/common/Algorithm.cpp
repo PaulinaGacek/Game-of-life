@@ -1,5 +1,6 @@
 #include "Algorithm.h"
 #include <fstream>
+#include <chrono>
 
 Algorithm::Algorithm(size_t width, size_t length) :WIDTH(width),LENGTH(length){
     grid.reserve(length);
@@ -7,6 +8,7 @@ Algorithm::Algorithm(size_t width, size_t length) :WIDTH(width),LENGTH(length){
     for(size_t i = 0; i < length; ++i){
         grid.push_back(row_with_zeroes);
     }
+    clearComputationTimeFile();
 }
 
 bool Algorithm::load_grid_from_file(const char *file_name) {
@@ -108,6 +110,7 @@ size_t Algorithm::getNrOfAliveNeighbours(size_t x, size_t y) const {
 }
 
 void Algorithm::compute_next_grid() {
+    auto start = std::chrono::system_clock::now();
     std::vector<std::vector<int>> new_grid;
     new_grid.reserve(LENGTH);
     std::vector<int> row_with_zeroes(WIDTH,0);
@@ -126,5 +129,35 @@ void Algorithm::compute_next_grid() {
             }
         }
     }
+    auto end = std::chrono::system_clock::now();
+    updateComputationTimeFile(start,end);
     grid = std::move(new_grid);
+}
+
+void Algorithm::updateComputationTimeFile(std::chrono::time_point<std::chrono::system_clock> start,
+                                          std::chrono::time_point<std::chrono::system_clock> end) {
+    static long long counter = 1;
+    auto value = std::chrono::duration_cast<std::chrono::nanoseconds>(end-start);
+    long long duration = value.count();
+    std::fstream computation_time_file;
+    computation_time_file.open("../src/logs/computation_time.txt", std::ios::app);
+    if (!computation_time_file) {
+        std::cerr << "No such file as computation_time.txt";
+    }
+    else {
+        computation_time_file << counter << " iteration: " << duration << std :: endl;
+    }
+    computation_time_file.close();
+    counter++;
+}
+
+void Algorithm::clearComputationTimeFile() {
+    std::fstream computation_time_file;
+    computation_time_file.open("../src/logs/computation_time.txt", std::ofstream::out | std::ofstream::trunc);
+    if (!computation_time_file) {
+        std::cerr << "No such file as computation_time.txt";
+    }
+    else{
+        computation_time_file.close();
+    }
 }
