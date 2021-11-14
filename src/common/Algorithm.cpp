@@ -38,24 +38,70 @@ void Algorithm::display_grid(std::vector<std::vector<int>> &v) const {
 
 size_t Algorithm::getNrOfAliveNeighbours(size_t x, size_t y) const {
     size_t aliveNeighbours = 0;
-    if (x > 0){
-        aliveNeighbours += grid[y][x - 1];
-        if(y > 0){
+
+    aliveNeighbours += (y > 0) ? grid[y - 1][x] : grid[LENGTH-1][x];
+    aliveNeighbours += (y < LENGTH - 1) ? grid[y + 1][x] : grid[0][x];
+    aliveNeighbours += (x > 0) ? grid[y][x - 1] : grid[y][WIDTH-1];
+    aliveNeighbours += (x < WIDTH - 1) ? grid[y][x + 1] : grid[y][0];
+
+    if (x > 0 && x < WIDTH - 1){
+        if(y > 0 && y < LENGTH - 1){
             aliveNeighbours += grid[y - 1][x - 1];
-            aliveNeighbours += grid[y-1][x];
+            aliveNeighbours += grid[y + 1][x - 1];
+            aliveNeighbours += grid[y - 1][x + 1];
+            aliveNeighbours += grid[y + 1][x + 1];
         }
-        if(y < LENGTH-1){
-            aliveNeighbours += grid[y+1][x-1];
-            aliveNeighbours += grid[y+1][x];
+        else if(y==0){
+            aliveNeighbours += grid[LENGTH-1][x - 1];
+            aliveNeighbours += grid[y + 1][x - 1];
+            aliveNeighbours += grid[LENGTH-1][x + 1];
+            aliveNeighbours += grid[y + 1][x + 1];
+        }
+        else{
+            aliveNeighbours += grid[y - 1][x - 1];
+            aliveNeighbours += grid[0][x - 1];
+            aliveNeighbours += grid[y - 1][x + 1];
+            aliveNeighbours += grid[0][x + 1];
         }
     }
-    if(x < WIDTH-1){
-        aliveNeighbours += grid[y][x + 1];
-        if(y > 0){
-            aliveNeighbours += grid[y-1][x + 1];
+    else if(x==0){
+        if(y > 0 && y < LENGTH - 1){
+            aliveNeighbours += grid[y - 1][WIDTH - 1];
+            aliveNeighbours += grid[y + 1][WIDTH - 1];
+            aliveNeighbours += grid[y - 1][x + 1];
+            aliveNeighbours += grid[y + 1][x + 1];
         }
-        if(y < LENGTH-1){
-            aliveNeighbours += grid[y+1][x + 1];
+        else if(y==0){
+            aliveNeighbours += grid[LENGTH-1][WIDTH - 1];
+            aliveNeighbours += grid[y + 1][WIDTH - 1];
+            aliveNeighbours += grid[LENGTH-1][x + 1];
+            aliveNeighbours += grid[y + 1][x + 1];
+        }
+        else{
+            aliveNeighbours += grid[y - 1][WIDTH - 1];
+            aliveNeighbours += grid[0][WIDTH - 1];
+            aliveNeighbours += grid[y - 1][x + 1];
+            aliveNeighbours += grid[0][x + 1];
+        }
+    }
+    else{ // x==WIDTH-1
+        if(y > 0 && y < LENGTH - 1){
+            aliveNeighbours += grid[y - 1][x - 1];
+            aliveNeighbours += grid[y + 1][x - 1];
+            aliveNeighbours += grid[y - 1][0];
+            aliveNeighbours += grid[y + 1][0];
+        }
+        else if(y==0){
+            aliveNeighbours += grid[LENGTH-1][x - 1];
+            aliveNeighbours += grid[y + 1][x - 1];
+            aliveNeighbours += grid[LENGTH-1][0];
+            aliveNeighbours += grid[y + 1][0];
+        }
+        else{
+            aliveNeighbours += grid[y - 1][x - 1];
+            aliveNeighbours += grid[0][x - 1];
+            aliveNeighbours += grid[y - 1][0];
+            aliveNeighbours += grid[0][0];
         }
     }
     return aliveNeighbours;
